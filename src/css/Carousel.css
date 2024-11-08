@@ -1,0 +1,22 @@
+#carousel {
+  max-height: 500px;
+  object-fit: contain !important;
+}
+
+.carousel-image {
+  filter: brightness(30%);
+}
+
+.carousel-caption {
+  z-index: 10;
+}
+
+.search-form .form-control {
+  margin-right: 0.5rem;
+}
+
+.search-button {
+  color: white;
+  background-color: green;
+  border-color: green;
+}
