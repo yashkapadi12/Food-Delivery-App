@@ -1,9 +1,10 @@
-import React from "react";
-import image from "../Images/pexels-janetrangdoan-1128678.jpg";
+import React, { useState } from "react";
 import lemon from "../Images/chris-liverani-LAaquQl19UY-unsplash.jpg";
+import image from "../Images/pexels-janetrangdoan-1128678.jpg";
 import "../css/Carousel.css";
 
-export const Carousel = () => {
+export  const Carousel = (props) => {
+  let search =props.Search
   return (
     <div>
       <div
@@ -13,20 +14,19 @@ export const Carousel = () => {
       >
         <div className="carousel-inner" id="carousel">
           <div className="carousel-caption">
-            <form className="d-flex search-form">
+            <div className="d-flex justify-content-center">
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={search}
+                onChange={(e)=>props.setSearch(e.target.value)}
               />
-              <button
-                className="search-button"
-                type="submit"
-              >
+              {/* <button className="search-button" type="submit">
                 Search
-              </button>
-            </form>
+              </button> */}
+            </div>
           </div>
           <div className="carousel-item active">
             <img
