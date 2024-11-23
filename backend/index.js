@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT;
 const mongoDB = require("./db"); // Ensure this file connects to MongoDB
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONTED_URL);
   res.header(
     "Access-Control-Allow-Headers",
     "Origin,X-requested-with,Content-Type,Accept"

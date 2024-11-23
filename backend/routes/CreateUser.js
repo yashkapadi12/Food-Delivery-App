@@ -4,7 +4,7 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const jwtSecret = "yashkapadighanshyamkapadibheem1$";
+// const jwtSecret = "yashkapadighanshyamkapadibheem1$";
 // Route to create a new user
 router.post(
   "/createUser",
@@ -68,7 +68,7 @@ router.post(
           id: userData.id,
         },
       };
-      const authToken = jwt.sign(data, jwtSecret);
+      const authToken = jwt.sign(data, process.env.JWT_SECRET);
       res.json({ success: true, authToken, email: userData.email });
     } catch (error) {
       console.error("Error logging in user:", error);
