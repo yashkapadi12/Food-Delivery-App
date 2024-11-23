@@ -28,9 +28,10 @@ function MyOrder() {
     const userEmail = sessionStorage.getItem("userEmail");
 
     console.log(userEmail); // Logs the email from sessionStorage
+    // console.log(url);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/myorderData",
+        `${process.env.REACT_APP_BASE_URL}/api/myorderData`,
         {
           email: userEmail,
         },
@@ -60,7 +61,7 @@ function MyOrder() {
 
       <div className="container">
         <div className="row">
-          {orderData !=={}
+          {orderData !== {}
             ? Array(orderData).map((data) => {
                 return data.orderData
                   ? data.orderData.order_data

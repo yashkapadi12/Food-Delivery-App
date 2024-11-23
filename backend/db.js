@@ -1,10 +1,8 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
-const mongoURI =
-  "mongodb+srv://admin:admin@cluster0.s1it3.mongodb.net/gofood?retryWrites=true&w=majority&appName=Cluster0";
-
 const mongoDB = async () => {
   try {
-    await mongoose.connect(mongoURI, { useNewUrlParser: true });
+    await mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
     console.log("connected ");
     const db = mongoose.connection.db;
     const fetched_data = await db.collection("food_items").find({}).toArray();

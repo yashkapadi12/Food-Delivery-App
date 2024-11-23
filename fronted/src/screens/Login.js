@@ -10,11 +10,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:8000/api/loginUser";
 
     axios
       .post(
-        url,
+        `${process.env.REACT_APP_BASE_URL}/api/loginUser`,
         {
           email: email,
           password: password,
