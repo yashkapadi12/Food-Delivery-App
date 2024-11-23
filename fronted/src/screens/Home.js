@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card } from "../components/Card";
-import Footer from "../components/Footer";
 import { Carousel } from "../components/Carsouel";
-import { Navbar } from "../components/Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   const [search, setSearch] = useState("");

@@ -1,6 +1,7 @@
 import Delete from "@material-ui/icons/Delete";
 import React from "react";
 import { useCart, useDispatchCart } from "../components/CardReducer";
+import axios from "axios";
 export default function Cart() {
   let data = useCart();
   let dispatch = useDispatchCart();
@@ -11,10 +12,29 @@ export default function Cart() {
       </div>
     );
   }
-  const handleRemove = (index)=>{
-    console.log(index)
-    dispatch({type:"REMOVE",index:index})
-  }
+
+  const handleCheckOut = async () => {
+    let userEmail = sessionStorage.getItem("userEmail");
+    let url = "http://localhost:8000/api/orderData";
+    await axios
+      .post(
+        url,
+        {
+          order_data: data,
+          email: userEmail,
+          order_date: new Date().toDateString(),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        dispatch({ type: "DROP" });
+      });
+  };
 
   //
   let totalPrice = data.reduce((total, food) => total + food.price, 0);

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import lemon from "../Images/chris-liverani-LAaquQl19UY-unsplash.jpg";
 import image from "../Images/pexels-janetrangdoan-1128678.jpg";
 import "../css/Carousel.css";
 
-export  const Carousel = (props) => {
-  let search =props.Search
+export const Carousel = (props) => {
+  let search = props.Search;
   return (
     <div>
       <div
@@ -21,7 +21,7 @@ export  const Carousel = (props) => {
                 placeholder="Search"
                 aria-label="Search"
                 value={search}
-                onChange={(e)=>props.setSearch(e.target.value)}
+                onChange={(e) => props.setSearch(e.target.value)}
               />
               {/* <button className="search-button" type="submit">
                 Search

@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("ranikapadi@gmail.com");
+  console.log(email);
+  const [password, setPassword] = useState("12345679");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -15,8 +16,8 @@ const Login = () => {
       .post(
         url,
         {
-          email,
-          password,
+          email: email,
+          password: password,
         },
         {
           headers: {
@@ -26,9 +27,14 @@ const Login = () => {
       )
       .then((response) => {
         navigate("/dashboard");
-        let authToken = response.data.authToken
-        sessionStorage.setItem("authToken",authToken);
-        console.log(sessionStorage.getItem("authToken"));
+        let authToken = response.data.authToken;
+        // console.log(authToken)
+        let userEmail = response.data.email;
+        // console.log(response.)
+        console.log(userEmail);
+        sessionStorage.setItem("userEmail", userEmail);
+        sessionStorage.setItem("authToken", authToken);
+        console.log(sessionStorage.getItem("userEmail"));
         console.log("Login response:", response.data);
       })
       .catch((error) => {

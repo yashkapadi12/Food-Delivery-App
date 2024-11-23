@@ -69,7 +69,7 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, jwtSecret);
-      res.json({ success: true, authToken: authToken });
+      res.json({ success: true, authToken, email: userData.email });
     } catch (error) {
       console.error("Error logging in user:", error);
       res.status(500).json({ success: false, message: "Server error" });

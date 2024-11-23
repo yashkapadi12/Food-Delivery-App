@@ -1,14 +1,24 @@
-import React from "react";
-import { Badge } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+import Modal from "../Modal";
+import Cart from "../screens/Cart";
+import { useCart } from "./CardReducer";
+
+const Navbar = () => {
+  const [cartView, setCartView] = useState(false);
+  let data = useCart();
+  localStorage.setItem("temp", "first");
   const navigate = useNavigate();
   const handleLogout = () => {
     sessionStorage.removeItem("authToken");
     navigate("/login");
   };
-  console.log(sessionStorage.getItem("authToken"));
+  const loadCart = () => {
+    setCartView(true);
+  };
+  // console.log(sessionStorage.getItem("authToken"));
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -38,7 +48,7 @@ export const Navbar = () => {
                 <Link
                   className="nav-link active fs-5"
                   aria-current="page"
-                  to="/"
+                  to="/myOrder"
                 >
                   MyOrders
                 </Link>
@@ -58,9 +68,20 @@ export const Navbar = () => {
               </div>
             ) : (
               <div>
-                <div className="btn bg-white text-success mx-1">My Cart
-                  <Badge pill bg='danger'>2</Badge>
+                <div
+                  className="btn bg-white text-success mx-1"
+                  onClick={loadCart}
+                >
+                  My Cart{" "}
+                  <Badge pill bg="danger">
+                    {data.length}
+                  </Badge>
                 </div>
+                {cartView ? (
+                  <Modal onClose={() => setCartView(false)}>
+                    <Cart></Cart>
+                  </Modal>
+                ) : null}
                 <div
                   className="btn bg-white text-success mx-1"
                   onClick={handleLogout}
@@ -75,3 +96,4 @@ export const Navbar = () => {
     </div>
   );
 };
+export default Navbar;
