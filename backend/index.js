@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoDB = require("./db");
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 // Connect to MongoDB
 mongoDB();
