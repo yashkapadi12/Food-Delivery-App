@@ -4,16 +4,14 @@ pipeline {
   environment {
     FRONTEND_DIR = 'fronted'
     BACKEND_DIR = 'backend'
-    CI = 'false' // Prevent React from failing on warnings
+    CI = 'false' // Prevent React from treating warnings as errors
   }
 
   stages {
     stage('Install Frontend Dependencies') {
       steps {
         dir("${FRONTEND_DIR}") {
-          sh '''
-            npm install --legacy-peer-deps || npm install --force
-          '''
+          sh 'npm install --legacy-peer-deps || npm install --force'
         }
       }
     }
@@ -29,10 +27,15 @@ pipeline {
     stage('Build Frontend') {
       steps {
         dir("${FRONTEND_DIR}") {
-          // Build instead of start in CI; use start only to run the dev server
-          sh 'npm  run build'
-          sh 'npm install -g serve'
-          sh 'serve -s build'
+          sh 'npm run build'
+        }
+      }
+    }
+
+    stage('Serve Frontend') {
+      steps {
+        dir("${FRONTEND_DIR}") {
+          sh 'npx serve -s build &'
         }
       }
     }
@@ -40,8 +43,7 @@ pipeline {
     stage('Start Backend') {
       steps {
         dir("${BACKEND_DIR}") {
-          // Optional: You might want to use pm2 or nohup here if keeping it alive
-          sh 'node  index.js'
+          sh 'node index.js &'
         }
       }
     }
