@@ -10,23 +10,8 @@ pipeline {
 
     stage('Build and Start Services') {
       steps {
-        sh 'docker-compose down || true'
-        sh 'docker-compose build'
-        sh 'docker-compose up -d'
-      }
-    }
-
-    stage('Verify') {
-      steps {
-        sh 'docker ps'
+        sh 'docker compose up -d'
       }
     }
   }
-
-  post {
-    always {
-      echo 'Cleaning up containers...'
-      sh 'docker-compose down'
-    }
-  }
-}
+   
