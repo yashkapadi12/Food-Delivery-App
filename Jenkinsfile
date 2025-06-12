@@ -18,17 +18,8 @@ pipeline {
       }
     }
 
-    stage('Verify') {
-      steps {
-        sh 'docker compose ps'
-      }
-    }
+    
   }
 
-  post {
-    always {
-      echo 'Cleaning up containers...'
-      sh 'docker compose down'
-    }
-  }
+  
 }
