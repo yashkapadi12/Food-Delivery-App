@@ -13,7 +13,7 @@ const Login = () => {
 
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/api/loginUser`,
+        `http://localhost:8000/api/loginUser`,
         {
           email: email,
           password: password,
