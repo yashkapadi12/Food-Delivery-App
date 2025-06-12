@@ -7,16 +7,16 @@ pipeline {
   }
 
   stages {
-    // stage('Checkout') {
-    //   steps {
-    //     git url: 'https://github.com/your-org/your-mern-repo.git', branch: 'main'
-    //   }
-    // }
+    stage('Checkout') {
+      steps {
+        git url: 'https://github.com/yashkapadi12/Food-Delivery-App.git', branch: 'main'
+      }
+    }
 
     stage('Install Frontend Dependencies') {
       steps {
         dir("${env.FRONTEND_DIR}") {
-          sh 'npm install'
+          sh 'npm install --legacy-peer-deps'
         }
       }
     }
