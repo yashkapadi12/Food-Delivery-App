@@ -1,11 +1,15 @@
 require("dotenv").config();
 const express = require("express");
-
+const cors = require("cors");
 const app = express();
-const port = process.env.PORT;
+const port = 8000
 const mongoDB = require("./db"); // Ensure this file connects to MongoDB
 app.use((req, res, next) => {
+<<<<<<< HEAD
   res.setHeader("Access-Control-Allow-Origin", 'http://localhost:3000');
+=======
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+>>>>>>> 1f4510f (This is done)
   res.header(
     "Access-Control-Allow-Headers",
     "Origin,X-requested-with,Content-Type,Accept"
@@ -22,7 +26,7 @@ app.use("/api", require("./routes/DisplayData"));
 app.use("/api", require("./routes/OrderData"));
 // Test route
 app.get("/", (req, res) => {
-  res.send("Hello World====!");
+  res.send("Hello Webelight");
 });
 
 // Start the server

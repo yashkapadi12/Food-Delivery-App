@@ -1,0 +1,46 @@
+name: Food-delivery-App
+
+services:
+  mongo:
+    image: mongo:7.0.12
+    ports:
+      - 27018:27017
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mern-app
+  node:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - mern-app
+    ports:
+      -  8000:8000
+    depends_on:
+      - mongo
+  fronted:
+    build: 
+      context: ./fronted
+      dockerfile: Dockerfile-fronted
+    restart: unless-stopped
+    env_file: ./fronted/.env
+    volumes:
+      - ./fronted:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    depends_on:
+      - node
+
+    
+volumes:
+  mongo_data:
+networks:
+  mern-app:
+    driver: bridge

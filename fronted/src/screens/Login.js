@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("ranikapadi@gmail.com");
+  const [email, setEmail] = useState("admin@gmail.com");
   console.log(email);
-  const [password, setPassword] = useState("12345679");
+  const [password, setPassword] = useState("admin");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {

@@ -1,0 +1,33 @@
+# -------- Stage 1: Build the app --------
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
+COPY . .
+#COPY .env .env
+RUN npm run build
+
+# -------- Stage 2: Serve with Node.js (non-root) --------
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install serve globally
+RUN npm install -g serve
+
+# Create non-root user and group
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
+  && chown -R appuser:appgroup /app
+
+# Copy build output from builder stage
+COPY --from=builder /app/build ./build
+
+
+# Switch to non-root user
+USER appuser
+
+EXPOSE 3000
+
+# Serve the app
+CMD ["serve", "-s", "build", "-l", "3000"]
