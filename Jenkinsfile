@@ -15,17 +15,17 @@ pipeline {
 
     stage('Install Frontend Dependencies') {
       steps {
-        dir("${env.FRONTEND_DIR}") {
+         
           sh 'npm install --legacy-peer-deps'
-        }
+    
       }
     }
 
     stage('Build Frontend') {
       steps {
-        dir("${env.FRONTEND_DIR}") {
+      
           sh 'npm run build'
-        }
+        
       }
     }
   }
