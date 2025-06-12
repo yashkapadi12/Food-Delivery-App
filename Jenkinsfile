@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    FRONTEND_DIR = '/home/web-h-010/Documents/Food-Delivery-App/fronted'
+    FRONTEND_DIR = 'fronted'
   }
 
   stages {
