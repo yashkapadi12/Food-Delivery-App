@@ -30,7 +30,7 @@ pipeline {
       steps {
         dir("${FRONTEND_DIR}") {
           // Build instead of start in CI; use start only to run the dev server
-          sh 'npm  build'
+          sh 'npm  run build'
         }
       }
     }
