@@ -16,7 +16,7 @@ pipeline {
     stage('Install Frontend Dependencies') {
       steps {
          
-          sh 'npm install --legacy-peer-deps'
+          sh 'npm install --legacy-peer-deps && npm install --force'
     
       }
     }
