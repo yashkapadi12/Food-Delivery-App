@@ -17,7 +17,7 @@ pipeline {
     stage('Build Frontend') {
       steps {
         dir("${FRONTEND_DIR}") {
-          sh 'npm run build'
+          sh 'npm start --force'
         }
       }
     }
