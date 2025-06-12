@@ -9,8 +9,8 @@ const SignUp = () => {
   const [location, setLocation] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const url = "http://localhost:8000/api/createUser";
+    e.preventDefault();1
+    const url = `${process.env.REACT_APP_BASE_URL} || http://localhost:8000/` ;
 
     axios
       .post(
