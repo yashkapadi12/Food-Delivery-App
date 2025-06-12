@@ -1,35 +1,33 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const mongoDB = require("./db");
+
 const app = express();
-const port = 8000
-const mongoDB = require("./db"); // Ensure this file connects to MongoDB
-app.use((req, res, next) => {
+const port = process.env.PORT || 8000;
 
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin,X-requested-with,Content-Type,Accept"
-  );
-  next();
-});
+// Connect to MongoDB
+mongoDB();
 
-// Middleware to parse JSON request bodies
-app.use(express.json());
+// Middleware
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
-// Route for creating users
+app.use(express.json()); // Parse JSON bodies
+
+// API Routes
 app.use("/api", require("./routes/CreateUser"));
 app.use("/api", require("./routes/DisplayData"));
 app.use("/api", require("./routes/OrderData"));
-// Test route
+
+// Root route
 app.get("/", (req, res) => {
   res.send("Hello Webelight");
 });
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`🚀 Server is running on http://localhost:${port}`);
 });
-
-// Connect to MongoDB
-mongoDB();
