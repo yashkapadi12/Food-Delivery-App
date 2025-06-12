@@ -7,25 +7,19 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        git url: 'https://github.com/yashkapadi12/Food-Delivery-App.git', branch: 'main'
-      }
-    }
-
     stage('Install Frontend Dependencies') {
       steps {
-         
-          sh 'npm install --legacy-peer-deps && npm install --force'
-    
+        dir("${FRONTEND_DIR}") {
+          sh 'npm install --legacy-peer-deps || npm install --force'
+        }
       }
     }
 
     stage('Build Frontend') {
       steps {
-      
+        dir("${FRONTEND_DIR}") {
           sh 'npm run build'
-        
+        }
       }
     }
   }
