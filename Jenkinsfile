@@ -3,7 +3,6 @@ pipeline {
 
   environment {
     FRONTEND_DIR = '/home/web-h-010/Documents/Food-Delivery-App/fronted'
-    BACKEND_DIR = '/home/web-h-010/Documents/Food-Delivery-App/backend'
   }
 
   stages {
