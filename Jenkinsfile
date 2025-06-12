@@ -31,6 +31,8 @@ pipeline {
         dir("${FRONTEND_DIR}") {
           // Build instead of start in CI; use start only to run the dev server
           sh 'npm  run build'
+          sh 'npm install -g serve'
+          sh 'serve -s build'
         }
       }
     }
