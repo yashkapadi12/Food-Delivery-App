@@ -1,3 +1,5 @@
+version: '3.8'
+
 name: Food-delivery-App
 
 services:
@@ -9,27 +11,33 @@ services:
       - mongo_data:/data/db
     networks:
       - mern-app
+
   node:
     build:
       context: ./backend
       dockerfile: Dockerfile-backend
     restart: unless-stopped
-    env_file: ./backend/.env
+    environment:
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.s1it3.mongodb.net/gofood?retryWrites=true&w=majority
+      - PORT=8000
+      - JWT_SECRET=dckr_pat_P7lFsktTEbJdPyaEYzmSvNNXQGE
     volumes:
       - ./backend:/app
       - /app/node_modules
     networks:
       - mern-app
     ports:
-      -  8000:8000
+      - 8000:8000
     depends_on:
       - mongo
+
   fronted:
     build: 
       context: ./fronted
       dockerfile: Dockerfile-fronted
     restart: unless-stopped
-    env_file: ./fronted/.env
+    environment:
+      - REACT_APP_BASE_URL=http://localhost:8000
     volumes:
       - ./fronted:/app
       - /app/node_modules
@@ -38,9 +46,9 @@ services:
     depends_on:
       - node
 
-    
 volumes:
   mongo_data:
+
 networks:
   mern-app:
     driver: bridge
